@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Deg540\PHPTestingBoilerplate\Test;
+namespace UserLoginService\Tests\Application;
 
-use Deg540\PHPTestingBoilerplate\UserLoginService;
 use PHPUnit\Framework\TestCase;
+use UserLoginService\Application\UserLoginService;
 
 final class UserLoginServiceTest extends TestCase
 {
@@ -16,6 +16,6 @@ final class UserLoginServiceTest extends TestCase
     {
         $userLoginService = new UserLoginService();
 
-        $this->assertEquals("user logged", $userLoginService->loginManually());
+        $this->assertEquals("user logged", $userLoginService->manualLogin());
     }
 }

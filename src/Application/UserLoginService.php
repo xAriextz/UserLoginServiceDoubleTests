@@ -1,12 +1,12 @@
 <?php
 
-namespace Deg540\PHPTestingBoilerplate;
+namespace UserLoginService\Application;
 
 class UserLoginService
 {
     private array $loggedUsers = [];
 
-    public function loginManually(): string
+    public function manualLogin(): string
     {
         return "user logged";
     }

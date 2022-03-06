@@ -1,6 +1,8 @@
 <?php
 
-namespace Deg540\PHPTestingBoilerplate;
+namespace UserLoginService\Infrastructure;
+
+use UserLoginService\Application\SessionManager;
 
 class FacebookSessionManager implements SessionManager
 {

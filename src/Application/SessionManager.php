@@ -1,6 +1,6 @@
 <?php
 
-namespace Deg540\PHPTestingBoilerplate;
+namespace UserLoginService\Application;
 
 interface SessionManager
 {
