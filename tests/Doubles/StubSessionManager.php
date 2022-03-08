@@ -15,6 +15,6 @@ class StubSessionManager implements SessionManager
 
     public function login(string $userName, string $password): bool
     {
-        return false;
+        return true;
     }
 }

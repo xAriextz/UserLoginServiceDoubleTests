@@ -46,5 +46,17 @@ final class UserLoginServiceTest extends TestCase
 
         $this->assertEquals(2, $numExternalSessions);
     }
+    /**
+     * @test
+     */
+    public function checksLogin()
+    {
+        $userLoginService = new UserLoginService(new StubSessionManager());
+
+        $resultMessage = $userLoginService->login("usuarioPrueba", "passwordPrueba");
+
+        $this->assertEquals("Login correcto", $resultMessage);
+    }
+
 
 }
