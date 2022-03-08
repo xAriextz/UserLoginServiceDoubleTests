@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use UserLoginService\Application\UserLoginService;
 use UserLoginService\Domain\User;
 use UserLoginService\Tests\Doubles\DummySessionManager;
+use UserLoginService\Tests\Doubles\FakeSessionManager;
 use UserLoginService\Tests\Doubles\StubSessionManager;
 
 
@@ -16,7 +17,7 @@ final class UserLoginServiceTest extends TestCase
     /**
      * @test user[]
      */
-    public function userIsLoggedIn()
+    public function userIsLoggedInManually()
     {
         $user = new User("user logged");
         $expectedLoggedUsers = [$user];
@@ -49,11 +50,37 @@ final class UserLoginServiceTest extends TestCase
     /**
      * @test
      */
-    public function checksLogin()
+    public function checksLoginExternalServiceHechoEnCasa()
     {
         $userLoginService = new UserLoginService(new StubSessionManager());
 
         $resultMessage = $userLoginService->login("usuarioPrueba", "passwordPrueba");
+
+        $this->assertEquals("Login correcto", $resultMessage);
+    }
+    /**
+     * @test
+     */
+    public function checksCorrectLoginExternalServiceHechoEnClase() //Este es el bueno
+    {
+        $userName = "userName";
+        $password = "password";
+        $userLoginService = new UserLoginService(new FakeSessionManager());
+
+        $resultMessage = $userLoginService->login("$userName", "$password");
+
+        $this->assertEquals("Login correcto", $resultMessage);
+    }
+    /**
+     * @test
+     */
+    public function checksIncorrectLoginExternalServiceHechoEnClase() //Este es el bueno
+    {
+        $userName = "userName2";
+        $password = "password";
+        $userLoginService = new UserLoginService(new FakeSessionManager());
+
+        $resultMessage = $userLoginService->login("$userName", "$password");
 
         $this->assertEquals("Login correcto", $resultMessage);
     }
