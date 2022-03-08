@@ -9,6 +9,7 @@ use UserLoginService\Application\UserLoginService;
 use UserLoginService\Domain\User;
 use UserLoginService\Tests\Doubles\DummySessionManager;
 use UserLoginService\Tests\Doubles\FakeSessionManager;
+use UserLoginService\Tests\Doubles\SpySessionManager;
 use UserLoginService\Tests\Doubles\StubSessionManager;
 
 
@@ -69,7 +70,7 @@ final class UserLoginServiceTest extends TestCase
 
         $resultMessage = $userLoginService->login("$userName", "$password");
 
-        $this->assertEquals("Login correcto", $resultMessage);
+        $this->assertEquals(UserLoginService::LOGIN_CORRECTO, $resultMessage);
     }
     /**
      * @test
@@ -82,7 +83,35 @@ final class UserLoginServiceTest extends TestCase
 
         $resultMessage = $userLoginService->login("$userName", "$password");
 
-        $this->assertEquals("Login correcto", $resultMessage);
+        $this->assertEquals(UserLoginService::LOGIN_INCORRECTO, $resultMessage);
+    }
+    /**
+     * @test
+     */
+    public function userLoggedOutUserNotBeingLoggedIn()
+    {
+        $userLoginService = new UserLoginService(new DummySessionManager());
+        $user = new User("userName");
+
+        $resultMessage = $userLoginService->logout($user);
+
+        $this->assertEquals(UserLoginService::USUARIO_NO_LOGEADO, $resultMessage);
+    }
+    /**
+     * @test
+     */
+    public function userLoggedOutUserBeingLoggedIn()
+    {
+        $sessionManager = new  SpySessionManager();
+        $userLoginService = new UserLoginService($sessionManager);
+        $user = new User("userName");
+        $userLoginService->manualLogin($user);
+
+        $resultMessage = $userLoginService->logout($user);
+
+        $sessionManager->verifyLogoutCalls(1);
+
+        $this->assertEquals(UserLoginService::OK, $resultMessage);
     }
 
 

@@ -16,4 +16,9 @@ class DummySessionManager implements SessionManager
     {
         // TODO: Implement login() method.
     }
+
+    public function logout(string $userName)
+    {
+        // TODO: Implement logout() method.
+    }
 }

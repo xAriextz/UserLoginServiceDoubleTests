@@ -15,8 +15,13 @@ class FakeSessionManager implements SessionManager
     public function login(string $userName, string $password): bool
     {
         if($userName == "userName" and $password == "password")
-            return "Login correcto";
+            return true;
         else
-            return "Login incorrecto";
+            return false;
+    }
+
+    public function logout(string $userName)
+    {
+        // TODO: Implement logout() method.
     }
 }
