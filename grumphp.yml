@@ -8,3 +8,9 @@ grumphp:
             exclude_group: []
             always_execute: false
             order: null
+        phpmd:
+            whitelist_patterns: [ ]
+            exclude: [ ]
+            report_format: text
+            ruleset: [ 'cleancode', 'codesize', 'naming' ]
+            triggered_by: [ 'php' ]
