@@ -32,4 +32,9 @@ class SpySessionManager implements SessionManager
         }
         return true;
     }
+
+    public function secureLogin(string $getUserName)
+    {
+        // TODO: Implement secureLogin() method.
+    }
 }

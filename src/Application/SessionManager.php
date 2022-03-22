@@ -8,7 +8,7 @@ interface SessionManager
 
     public function login(string $userName, string $password): bool;
 
-    public function secureLogin(string $userName, string $password): string;
-
     public function logout(string $userName) ;
+
+    public function secureLogin(string $getUserName);
 }

@@ -2,6 +2,7 @@
 
 namespace UserLoginService\Application;
 
+use Exception;
 use PhpParser\Node\Scalar\String_;
 use UserLoginService\Domain\User;
 use function Sodium\add;
@@ -60,4 +61,16 @@ class UserLoginService
         return self::OK;
     }
 
+    public function secureLogin(User $user): String
+    {
+        try{
+            $this->sessionManager->secureLogin($user->getUserName());
+        }catch (Exception $exception){
+            if($exception->getMessage() == "User does not exist") {
+                return "Usuario no existe";
+            }
+
+        }
+        return "OK";
+    }
 }
